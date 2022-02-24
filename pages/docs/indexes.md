@@ -3,7 +3,7 @@ title: Database Indexes
 layout: page
 ---
 
-GORM allows create database index with tag `index`, `uniqueIndex`, those indexes will be created when [AutoMigrate or CreateTable with GORM](migration.html)
+GORM allows creating a database index with tag `index`, `uniqueIndex`, those indexes will be created when [AutoMigrate or CreateTable with GORM](migration.html)
 
 ## Index Tag
 
@@ -45,7 +45,7 @@ type User struct {
 
 ## Composite Indexes
 
-Use same index name for two fields will creates composite indexes, for example:
+Use same index name for two fields will create composite indexes, for example:
 
 ```go
 type User struct {
@@ -56,7 +56,7 @@ type User struct {
 
 ### Fields Priority
 
-The column order of a composite index has an impact on its performance so it must be chosen carefully
+The column order of a composite index has an impact on its performance, so it must be chosen carefully
 
 You can specify the order with the `priority` option, the default priority value is `10`, if priority value is the same, the order will be based on model struct's field index
 

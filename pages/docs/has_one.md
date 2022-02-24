@@ -119,7 +119,7 @@ db.Create(&Dog{Name: "dog1", Toy: Toy{Name: "toy1"}})
 
 ## CRUD with Has One
 
-Please checkout [Association Mode](associations.html#Association-Mode) for working with `has one` relations
+Please check out [Association Mode](associations.html#Association-Mode) for working with `has one` relations
 
 ## Eager Loading
 
@@ -138,7 +138,7 @@ type User struct {
 
 ## FOREIGN KEY Constraints
 
-You can setup `OnUpdate`, `OnDelete` constraints with tag `constraint`, it will be created when migrating with GORM, for example:
+You can set up `OnUpdate`, `OnDelete` constraints with tag `constraint`, it will be created when migrating with GORM, for example:
 
 ```go
 type User struct {
@@ -153,4 +153,4 @@ type CreditCard struct {
 }
 ```
 
-You are also allowed to delete selected has one associations with `Select` when deleting, checkout [Delete with Select](associations.html#delete_with_select) for details
+You are also allowed to delete selected `has one` associations with `Select` when deleting, check out [Delete with Select](associations.html#delete_with_select) for details

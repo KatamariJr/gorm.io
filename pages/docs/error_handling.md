@@ -9,7 +9,7 @@ You are encouraged to do error check after any [Finisher Methods](method_chainin
 
 ## Error Handling
 
-Error handling in GORM is different than idiomatic Go code because of its chainable API.
+Error handling in GORM is different from idiomatic Go code because of its chainable API.
 
 If any error occurs, GORM will set `*gorm.DB`'s `Error` field, you need to check it like this:
 

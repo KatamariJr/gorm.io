@@ -34,7 +34,7 @@ db.Preload("Orders").Preload("Profile").Preload("Role").Find(&users)
 
 ## Joins Preloading
 
-`Preload` loads the association data in a separate query, `Join Preload` will loads association data using inner join, for example:
+`Preload` loads the association data in a separate query, `Join Preload` will load association data using inner join, for example:
 
 ```go
 db.Joins("Company").Joins("Manager").Joins("Account").First(&user, 1)

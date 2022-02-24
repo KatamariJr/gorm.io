@@ -41,7 +41,7 @@ db, err := gorm.Open(mysql.New(mysql.Config{
 
 ### Customize Driver
 
-GORM allows customize the MySQL driver with the `DriverName` option, for example:
+GORM allows customization of the MySQL driver with the `DriverName` option, for example:
 
 ```go
 import (
@@ -57,7 +57,7 @@ db, err := gorm.Open(mysql.New(mysql.Config{
 
 ### Existing database connection
 
-GORM allows to initialize `*gorm.DB` with an existing database connection
+GORM allows initializing `*gorm.DB` with an existing database connection
 
 ```go
 import (
@@ -96,7 +96,7 @@ db, err := gorm.Open(postgres.New(postgres.Config{
 
 ### Customize Driver
 
-GORM allows customize the PostgreSQL driver with the `DriverName` option, for example:
+GORM allows customization of the PostgreSQL driver with the `DriverName` option, for example:
 
 ```go
 import (
@@ -112,7 +112,7 @@ db, err := gorm.Open(postgres.New(postgres.Config{
 
 ### Existing database connection
 
-GORM allows to initialize `*gorm.DB` with an existing database connection
+GORM allows initializing `*gorm.DB` with an existing database connection
 
 ```go
 import (

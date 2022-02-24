@@ -25,7 +25,7 @@ type User struct {
 
 ## Conventions
 
-GORM prefer convention over configuration, by default, GORM uses `ID` as primary key, pluralize struct name to `snake_cases` as table name, `snake_case` as column name, and uses `CreatedAt`, `UpdatedAt` to track creating/updating time
+GORM prefers convetion to configuration, by default, GORM uses `ID` as primary key, pluralize struct name to `snake_cases` as table name, `snake_case` as column name, and uses `CreatedAt`, `UpdatedAt` to track creating/updating time
 
 If you follow the conventions adopted by GORM, you'll need to write very little configuration/code, If convention doesn't match your requirements, [GORM allows you to configure them](conventions.html)
 
@@ -69,7 +69,7 @@ type User struct {
 }
 ```
 
-### <name id="time_tracking">Creating/Updating Time/Unix (Milli/Nano) Seconds Tracking</span>
+### <name id="time_tracking">Creating/Updating Time/Unix (milli/nano) Seconds Tracking</span>
 
 GORM use `CreatedAt`, `UpdatedAt` to track creating/updating time by convention, and GORM will set the  [current time](gorm_config.html#now_func) when creating/updating if the fields are defined
 
@@ -149,7 +149,7 @@ type Blog struct {
 ### <span id="tags">Fields Tags</span>
 
 Tags are optional to use when declaring models, GORM supports the following tags:
-Tags are case insensitive, however `camelCase` is preferred.
+Tags are case-insensitive, however `camelCase` is preferred.
 
 | Tag Name       | Description                                                            |
 | ---            | ---                                                                    |
@@ -169,13 +169,13 @@ Tags are case insensitive, however `camelCase` is preferred.
 | autoCreateTime | track current time when creating, for `int` fields, it will track unix seconds, use value `nano`/`milli` to track unix nano/milli seconds, e.g: `autoCreateTime:nano` |
 | autoUpdateTime | track current time when creating/updating, for `int` fields, it will track unix seconds, use value `nano`/`milli` to track unix nano/milli seconds, e.g: `autoUpdateTime:milli` |
 | index          | create index with options, use same name for multiple fields creates composite indexes, refer [Indexes](indexes.html) for details |
-| uniqueIndex    | same as `index`, but create uniqued index                              |
+| uniqueIndex    | same as `index`, but create unique index                              |
 | check          | creates check constraint, eg: `check:age > 13`, refer [Constraints](constraints.html) |
 | <-             | set field's write permission, `<-:create` create-only field, `<-:update` update-only field, `<-:false` no write permission, `<-` create and update permission |
 | ->             | set field's read permission, `->:false` no read permission             |
 | -              | ignore this field, `-` no read/write permission                       |
 | comment        | add comment for field when migration                                  |
 
-### Associations Tags
+### Association Tags
 
-GORM allows configure foreign keys, constraints, many2many table through tags for Associations, check out the [Associations section](associations.html#tags) for details
+GORM allows configuring foreign keys, constraints, many2many table through tags for Associations, check out the [Associations section](associations.html#tags) for details

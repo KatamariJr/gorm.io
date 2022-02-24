@@ -3,13 +3,13 @@ title: Customize Data Types
 layout: page
 ---
 
-GORM provides few interfaces that allow users to define well-supported customized data types for GORM, takes [json](https://github.com/go-gorm/datatypes/blob/master/json.go) as an example
+GORM provides few interfaces that allow users to define well-supported customized data types for GORM, takes [JSON](https://github.com/go-gorm/datatypes/blob/master/json.go) as an example
 
 ## Implements Customized Data Type
 
 ### Scanner / Valuer
 
-The customized data type has to implement the [Scanner](https://pkg.go.dev/database/sql#Scanner) and [Valuer](https://pkg.go.dev/database/sql/driver#Valuer) interfaces, so GORM knowns to how to receive/save it into the database
+The customized data type has to implement the [Scanner](https://pkg.go.dev/database/sql#Scanner) and [Valuer](https://pkg.go.dev/database/sql/driver#Valuer) interfaces, so GORM knows to how to receive/save it into the database
 
 For example:
 
@@ -38,7 +38,7 @@ func (j JSON) Value() (driver.Value, error) {
 }
 ```
 
-There are many third party packages implement the `Scanner`/`Valuer` interface, which can be used with GORM together, for example:
+There are many third party packages that implement the `Scanner`/`Valuer` interface, which can be used with GORM together, for example:
 
 ```go
 import (
@@ -67,7 +67,7 @@ type GormDBDataTypeInterface interface {
 }
 ```
 
-The result of `GormDataType` will be used as the general data type and can be obtained from `schema.Field`'s field `DataType`, which might be helpful when [writing plugins](write_plugins.html) or [hooks](hooks.html) for example:
+The result of `GormDataType` will be used as the general data type and can be obtained from `schema.Field`'s field `DataType`, which might be helpful when [writing plugins](write_plugins.html) or [hooks,](hooks.html) for example:
 
 ```go
 func (JSON) GormDataType() string {
@@ -174,7 +174,7 @@ You can also create/update with SQL Expr from map, checkout [Create From SQL Exp
 
 #### Value based on Context
 
-If you want to create or update a value depends on current context, you can also implements the `GormValuerInterface` interface, for example:
+If you want to create or update a value depends on current context, you can also implement the `GormValuerInterface` interface, for example:
 
 ```go
 type EncryptedString struct {
@@ -227,4 +227,4 @@ db.Find(&user, datatypes.JSONQuery("attributes").Equals("jinzhu", "name"))
 
 ## Customized Data Types Collections
 
-We created a Github repo for customized data types collections [https://github.com/go-gorm/datatypes](https://github.com/go-gorm/datatypes), pull request welcome ;)
+We created a GitHub repo for customized data types collections [https://github.com/go-gorm/datatypes](https://github.com/go-gorm/datatypes), pull request welcome ;)

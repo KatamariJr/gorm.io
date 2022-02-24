@@ -3,7 +3,7 @@ title: Sharding
 layout: page
 ---
 
-Sharding plugin using SQL parser and replace for splits large tables into smaller ones, redirects Query into sharding tables. Give you a high performance database access.
+Sharding plugin using SQL parser and replace for splits large tables into smaller ones, redirects Query into sharded tables. Give you a high performance database access.
 
 https://github.com/go-gorm/sharding
 
@@ -12,7 +12,7 @@ https://github.com/go-gorm/sharding
 - Non-intrusive design. Load the plugin, specify the config, and all done.
 - Lighting-fast. No network based middlewares, as fast as Go.
 - Multiple database support. PostgreSQL tested, MySQL and SQLite is coming.
-- Allows you custom the Primary Key generator (Built in keygen, Sequence, Snowflake ...).
+- Allows you custom the Primary Key generator (built in keygen, Sequence, Snowflake ...).
 
 ## Usage
 
@@ -42,7 +42,7 @@ db.Use(sharding.Register(sharding.Config{
 }, Notification{}, AuditLog{}))
 ```
 
-Use the db session as usual. Just note that the query should have the `Sharding Key` when operate sharding tables.
+Use the db session as usual. Just note that the query should have the `Sharding Key` when operating sharding tables.
 
 ```go
 // Gorm create example, this will insert to orders_02

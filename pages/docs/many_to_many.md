@@ -82,7 +82,7 @@ type Profile struct {
 
 {% note warn %}
 **NOTE:**
-Some databases only allow create database foreign keys that reference on a field having unique index, so you need to specify the `unique index` tag if you are creating database foreign keys when migrating
+Some databases only allow creating database foreign keys that reference on a field having unique index, so you need to specify the `unique index` tag if you are creating database foreign keys when migrating
 {% endnote %}
 
 ## Self-Referential Many2Many
@@ -106,11 +106,11 @@ GORM allows eager loading has many associations with `Preload`, refer [Preloadin
 
 ## CRUD with Many2Many
 
-Please checkout [Association Mode](associations.html#Association-Mode) for working with many2many relations
+Please check out [Association Mode](associations.html#Association-Mode) for working with many2many relations
 
 ## Customize JoinTable
 
-`JoinTable` can be a full-featured model, like having `Soft Delete`，`Hooks` supports and more fields, you can setup it with `SetupJoinTable`, for example:
+`JoinTable` can be a full-featured model, like having `Soft Delete`，`Hooks` supports and more fields, you can set up it with `SetupJoinTable`, for example:
 
 {% note warn %}
 **NOTE:**
@@ -147,7 +147,7 @@ err := db.SetupJoinTable(&Person{}, "Addresses", &PersonAddress{})
 
 ## FOREIGN KEY Constraints
 
-You can setup `OnUpdate`, `OnDelete` constraints with tag `constraint`, it will be created when migrating with GORM, for example:
+You can set up `OnUpdate`, `OnDelete` constraints with tag `constraint`, it will be created when migrating with GORM, for example:
 
 ```go
 type User struct {

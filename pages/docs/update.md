@@ -125,7 +125,7 @@ db.Session(&gorm.Session{AllowGlobalUpdate: true}).Model(&User{}).Update("name",
 
 ### Updated Records Count
 
-Get the number of rows affected by a update
+Get the number of rows affected by an update
 
 ```go
 // Get updated records count with `RowsAffected`
@@ -270,7 +270,7 @@ db.Model(&User{ID: 1, Name: "jinzhu"}).Select("Admin").Updates(User{Name: "jinzh
 
 ### Change Updating Values
 
-To change updating values in Before Hooks, you should use `SetColumn` unless it is a full updates with `Save`, for example:
+To change updating values in Before Hooks, you should use `SetColumn` unless it is a full update with `Save`, for example:
 
 ```go
 func (user *User) BeforeSave(tx *gorm.DB) (err error) {

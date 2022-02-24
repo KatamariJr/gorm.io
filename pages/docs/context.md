@@ -7,7 +7,7 @@ GORM provides Context support, you can use it with method `WithContext`
 
 ## Single Session Mode
 
-Single session mode usually used when you want to perform a single operation
+Single session mode is usually used when you want to perform a single operation
 
 ```go
 db.WithContext(ctx).Find(&users)
@@ -15,7 +15,7 @@ db.WithContext(ctx).Find(&users)
 
 ## Continuous session mode
 
-Continuous session mode usually used when you want to perform a group of operations, for example:
+Continuous session mode is usually used when you want to perform a group of operations, for example:
 
 ```go
 tx := db.WithContext(ctx)

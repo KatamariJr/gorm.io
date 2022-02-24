@@ -3,7 +3,7 @@ title: Session
 layout: page
 ---
 
-GORM provides `Session` method, which is a [`New Session Method`](method_chaining.html), it allows to create a new session mode with configuration:
+GORM provides `Session` method, which is a [`New Session Method`](method_chaining.html), it allows creating a new session mode with configuration:
 
 ```go
 // Session Configuration
@@ -44,7 +44,7 @@ stmt.SQL.String() //=> SELECT * FROM `users` WHERE `id` = ?  // MySQL
 stmt.Vars         //=> []interface{}{1}
 ```
 
-To generate the final SQL, you could use following code:
+To generate the final SQL, you could use the following code:
 
 ```go
 // NOTE: the SQL is not always safe to execute, GORM only uses it for logs, it might cause SQL injection
@@ -170,7 +170,7 @@ tx.First(&user) // query with context timeoutCtx
 tx.Model(&user).Update("role", "admin") // update with context timeoutCtx
 ```
 
-GORM also provides shortcut method `WithContext`,  here is the definition:
+GORM also provides a shortcut method `WithContext`,  here is the definition:
 
 ```go
 func (db *DB) WithContext(ctx context.Context) *DB {
@@ -180,7 +180,7 @@ func (db *DB) WithContext(ctx context.Context) *DB {
 
 ## Logger
 
-Gorm allows customizing built-in logger with the `Logger` option, for example:
+Gorm allows customizing the built-in logger with the `Logger` option, for example:
 
 ```go
 newLogger := logger.New(log.New(os.Stdout, "\r\n", log.LstdFlags),

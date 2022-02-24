@@ -5,7 +5,7 @@ layout: page
 
 ## Auto Create/Update
 
-GORM will auto-save associations and its reference using [Upsert](create.html#upsert) when creating/updating a record.
+GORM will auto-save associations and their references using [Upsert](create.html#upsert) when creating/updating a record.
 
 ```go
 user := User{
@@ -34,7 +34,7 @@ db.Create(&user)
 db.Save(&user)
 ```
 
-If you want to update associations's data, you should use the `FullSaveAssociations` mode:
+If you want to update association data, you should use the `FullSaveAssociations` mode:
 
 ```go
 db.Session(&gorm.Session{FullSaveAssociations: true}).Updates(&user)
@@ -82,7 +82,7 @@ For many2many associations, GORM will upsert the associations before creating th
 db.Omit("Languages.*").Create(&user)
 ```
 
-The following code will skip the creation of the association and its references
+The following code will skip the creation of the association and its references:
 
 ```go
 db.Omit("Languages").Create(&user)
@@ -138,7 +138,7 @@ db.Model(&user).Where("code IN ?", codes).Order("code desc").Association("Langua
 
 ### Append Associations
 
-Append new associations for `many to many`, `has many`, replace current association for `has one`, `belongs to`
+Append new associations for `many to many` and `has many` associations. Replace the current association for `has one` and `belongs to` associations.
 
 ```go
 db.Model(&user).Association("Languages").Append([]Language{languageZH, languageEN})
@@ -160,7 +160,7 @@ db.Model(&user).Association("Languages").Replace(Language{Name: "DE"}, languageE
 
 ### Delete Associations
 
-Remove the relationship between source & arguments if exists, only delete the reference, won't delete those objects from DB.
+Remove the relationship between source & arguments if it exists. This will only delete the reference, and will not delete those objects from DB.
 
 ```go
 db.Model(&user).Association("Languages").Delete([]Language{languageZH, languageEN})
@@ -169,7 +169,7 @@ db.Model(&user).Association("Languages").Delete(languageZH, languageEN)
 
 ### Clear Associations
 
-Remove all reference between source & association, won't delete those associations
+Remove all reference between source & association. This will not delete those associations.
 
 ```go
 db.Model(&user).Association("Languages").Clear()
@@ -211,7 +211,7 @@ db.Model(&users).Association("Team").Replace(&userA, &userB, &[]User{userA, user
 
 ## <span id="delete_with_select">Delete with Select</span>
 
-You are allowed to delete selected has one/has many/many2many relations with `Select` when deleting records, for example:
+You are allowed to delete selected `has one`/`has many`/`many2many` relations with `Select` when deleting records, for example:
 
 ```go
 // delete user's account when deleting user
@@ -229,7 +229,7 @@ db.Select("Account").Delete(&users)
 
 {% note warn %}
 **NOTE:**
-Associations will only be deleted if the deleting records's primary key is not zero, GORM will use those priamry keys as conditions to delete selected associations
+Associations will only be deleted if the deleting record's primary key is not zero, GORM will use those primary keys as conditions to delete selected associations
 
 ```go
 // DOESN'T WORK

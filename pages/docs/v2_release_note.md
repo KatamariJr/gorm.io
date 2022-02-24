@@ -17,7 +17,7 @@ GORM 2.0 is a rewrite from scratch, it introduces some incompatible-API change a
 * Field permissions support: read-only, write-only, create-only, update-only, ignored
 * New plugin system, provides official plugins for multiple databases, read/write splitting, prometheus integrations...
 * New Hooks API: unified interface with plugins
-* New Migrator: allows to create database foreign keys for relationships, smarter AutoMigrate, constraints/checker support, enhanced index support
+* New Migrator: allows creating database foreign keys for relationships, smarter AutoMigrate, constraints/checker support, enhanced index support
 * New Logger: context support, improved extensibility
 * Unified Naming strategy: table name, field name, join table name, foreign key, checker, index name rules
 * Better customized data type support (e.g: JSON)
@@ -70,7 +70,7 @@ db.WithContext(ctx).Find(&users)
 
 #### Batch Insert
 
-To efficiently insert large number of records, pass a slice to the `Create` method. GORM will generate a single SQL statement to insert all the data and backfill primary key values, hook methods will be invoked too.
+To efficiently insert a large number of records, pass a slice to the `Create` method. GORM will generate a single SQL statement to insert all the data and backfill primary key values, hook methods will be invoked too.
 
 ```go
 var users = []User{{Name: "jinzhu1"}, {Name: "jinzhu2"}, {Name: "jinzhu3"}}
@@ -92,7 +92,7 @@ db.CreateInBatches(users, 100)
 
 #### Prepared Statement Mode
 
-Prepared Statement Mode creates prepared stmt and caches them to speed up future calls
+Prepared Statement Mode creates prepared statement and caches them to speed up future calls
 
 ```go
 // globally mode, all operations will create prepared stmt and cache to speed up
@@ -364,7 +364,7 @@ type User struct {
 
 #### Multiple Databases, Read/Write Splitting
 
-GORM provides multiple databases, read/write splitting support with plugin `DB Resolver`, which also supports auto-switching database/table based on current struct/table, and multiple sources、replicas supports with customized load-balancing logic
+GORM provides multiple databases, read/write splitting support with plugin `DB Resolver`, which also supports auto-switching database/table based on current struct/table, and multiple sources, replicas supports with customized load-balancing logic
 
 Check out [Database Resolver](dbresolver.html) for details
 
@@ -376,7 +376,7 @@ Check out [Prometheus](prometheus.html) for details
 
 #### Naming Strategy
 
-GORM allows users change the default naming conventions by overriding the default `NamingStrategy`, which is used to build `TableName`, `ColumnName`, `JoinTableName`, `RelationshipFKName`, `CheckerName`, `IndexName`, Check out [GORM Config](gorm_config.html) for details
+GORM allows users to change the default naming conventions by overriding the default `NamingStrategy`, which is used to build `TableName`, `ColumnName`, `JoinTableName`, `RelationshipFKName`, `CheckerName`, `IndexName`, Check out [GORM Config](gorm_config.html) for details
 
 ```go
 db, err := gorm.Open(sqlite.Open("gorm.db"), &gorm.Config{
@@ -496,7 +496,7 @@ We are trying to list big breaking changes or those changes can't be caught by t
 
 #### Tags
 
-* GORM V2 prefer write tag name in `camelCase`, tags in `snake_case` won't works anymore, for example: `auto_increment`, `unique_index`, `polymorphic_value`, `embedded_prefix`, check out [Model Tags](models.html#tags)
+* GORM V2 prefer write tag name in `camelCase`, tags in `snake_case` won't work anymore, for example: `auto_increment`, `unique_index`, `polymorphic_value`, `embedded_prefix`, check out [Model Tags](models.html#tags)
 * Tags used to specify foreign keys changed to `foreignKey`, `references`, check out [Associations Tags](associations.html#tags)
 * Not support `sql` tag
 
@@ -524,7 +524,7 @@ db.Scopes(UserTable(&user)).Create(&user)
 
 #### Creating and Deleting Tables requires the use of the Migrator
 
-Previously tables could be created and dropped as follows:
+Previously, tables could be created and dropped as follows:
 
 ```go
 db.CreateTable(&MyTable{})
@@ -561,7 +561,7 @@ ALTER TABLE `Profiles` ADD CONSTRAINT `fk_users_profiles` FORIEGN KEY (`useres_i
 
 #### Method Chain Safety/Goroutine Safety
 
-To reduce GC allocs, GORM V2 will share `Statement` when using method chains, and will only create new `Statement` instances for new initialized `*gorm.DB` or after a `New Session Method`, to reuse a `*gorm.DB`, you need to make sure it just after a `New Session Method`, for example:
+To reduce GC allocations, GORM V2 will share `Statement` when using method chains, and will only create new `Statement` instances for new initialized `*gorm.DB` or after a `New Session Method`, to reuse a `*gorm.DB`, you need to make sure it just after a `New Session Method`, for example:
 
 ```go
 db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
@@ -646,7 +646,7 @@ errors.Is(err, gorm.ErrRecordNotFound)
 
 #### Hooks Method
 
-Before/After Create/Update/Save/Find/Delete must be defined as a method of type `func(tx *gorm.DB) error` in V2, which has unified interfaces like plugin callbacks, if defined as other types, a warning log will be printed and it won't take effect, check out [Hooks](hooks.html) for details
+Before/After Create/Update/Save/Find/Delete must be defined as a method of type `func(tx *gorm.DB) error` in V2, which has unified interfaces like plugin callbacks, if defined as other types, a warning log will be printed, and it won't take effect, check out [Hooks](hooks.html) for details
 
 ```go
 func (user *User) BeforeCreate(tx *gorm.DB) error {
@@ -697,11 +697,11 @@ db.Model(&User{ID: 1, Name: "jinzhu"}).Select("Admin").Updates(User{Name: "jinzh
 
 #### Plugins
 
-Plugin callbacks also need be defined as a method of type `func(tx *gorm.DB) error`, check out [Write Plugins](write_plugins.html) for details
+Plugin callbacks also need to be defined as a method of type `func(tx *gorm.DB) error`, check out [Write Plugins](write_plugins.html) for details
 
 #### Updating with struct
 
-When updating with struct, GORM V2 allows to use `Select` to select zero-value fields to update them, for example:
+When updating with struct, GORM V2 allows using `Select` to select zero-value fields to update them, for example:
 
 ```go
 db.Model(&user).Select("Role", "Age").Update(User{Name: "jinzhu", Role: "", Age: 0})
@@ -709,7 +709,7 @@ db.Model(&user).Select("Role", "Age").Update(User{Name: "jinzhu", Role: "", Age:
 
 #### Associations
 
-GORM V1 allows to use some settings to skip create/update associations, in V2, you can use `Select` to do the job, for example:
+GORM V1 allows using some settings to skip create/update associations, in V2, you can use `Select` to do the job, for example:
 
 ```go
 db.Omit(clause.Associations).Create(&user)
@@ -727,7 +727,7 @@ db.Preload(clause.Associations).Find(&users)
 
 Also, checkout field permissions, which can be used to skip creating/updating associations globally
 
-GORM V2 will use upsert to save associations when creating/updating a record, won't save full associations data anymore to protect your data from saving uncompleted data, for example:
+GORM V2 will use upsert to save associations when creating/updating a record, won't save full association data anymore to protect your data from saving uncompleted data, for example:
 
 ```go
 user := User{
@@ -802,7 +802,7 @@ Count only accepts `*int64` as the argument
 
 #### Transactions
 
-some transaction methods like `RollbackUnlessCommitted` removed, prefer to use method `Transaction` to wrap your transactions
+some transaction methods, like `RollbackUnlessCommitted` removed, prefer to use method `Transaction` to wrap your transactions
 
 ```go
 db.Transaction(func(tx *gorm.DB) error {
@@ -826,7 +826,7 @@ Checkout [Transactions](transactions.html) for details
 #### Migrator
 
 * Migrator will create database foreign keys by default
-* Migrator is more independent, many API renamed to provide better support for each database with unified API interfaces
+* Migrator is more independent, many APIs renamed to provide better support for each database with unified API interfaces
 * AutoMigrate will alter column's type if its size, precision, nullable changed
 * Support Checker through tag `check`
 * Enhanced tag setting for `index`

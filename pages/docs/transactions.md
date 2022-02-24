@@ -117,7 +117,7 @@ func CreateAnimals(db *gorm.DB) error {
 
 ## SavePoint, RollbackTo
 
-GORM provides `SavePoint`, `RollbackTo` to save points and roll back to a savepoint, for example:
+GORM provides `SavePoint`, `RollbackTo` to save points and roll back to a save point, for example:
 
 ```go
 tx := db.Begin()

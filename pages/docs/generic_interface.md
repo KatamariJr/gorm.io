@@ -20,7 +20,7 @@ sqlDB.Stats()
 ```
 
 {% note warn %}
-**NOTE** If the underlying database connection is not a `*sql.DB`, like in a transaction, it will returns error
+**NOTE** If the underlying database connection is not a `*sql.DB`, like in a transaction, it will return an error
 {% endnote %}
 
 ## Connection Pool

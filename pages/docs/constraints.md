@@ -3,7 +3,7 @@ title: Constraints
 layout: page
 ---
 
-GORM allows create database constraints with tag, constraints will be created when [AutoMigrate or CreateTable with GORM](migration.html)
+GORM allows creating database constraints with tag, constraints will be created when [AutoMigrate or CreateTable with GORM](migration.html)
 
 ## CHECK Constraint
 
@@ -23,7 +23,7 @@ Checkout [Database Indexes](indexes.html)
 
 ## Foreign Key Constraint
 
-GORM will creates foreign keys constraints for associations, you can disable this feature during initialization:
+GORM will create foreign keys constraints for associations, you can disable this feature during initialization:
 
 ```go
 db, err := gorm.Open(sqlite.Open("gorm.db"), &gorm.Config{
@@ -31,7 +31,7 @@ db, err := gorm.Open(sqlite.Open("gorm.db"), &gorm.Config{
 })
 ```
 
-GORM allows you setup FOREIGN KEY constraints's `OnDelete`, `OnUpdate` option with tag `constraint`, for example:
+GORM allows you to set up FOREIGN KEY constraint's `OnDelete`, `OnUpdate` option with tag `constraint`, for example:
 
 ```go
 type User struct {

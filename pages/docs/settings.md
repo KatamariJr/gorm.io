@@ -3,7 +3,7 @@ title: Settings
 layout: page
 ---
 
-GORM provides `Set`, `Get`, `InstanceSet`, `InstanceGet` methods allow users pass values to [hooks](hooks.html) or other methods
+GORM provides `Set`, `Get`, `InstanceSet`, `InstanceGet` methods allow users to pass values to [hooks](hooks.html) or other methods
 
 GORM uses this for some features, like pass creating table options when migrating table.
 

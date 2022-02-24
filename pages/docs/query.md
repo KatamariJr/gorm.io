@@ -32,7 +32,7 @@ errors.Is(result.Error, gorm.ErrRecordNotFound)
 If you want to avoid the `ErrRecordNotFound` error, you could use `Find` like `db.Limit(1).Find(&user)`, the `Find` method accepts both struct and slice data
 {% endnote %}
 
-The `First` and `Last` methods will find the first and last record (respectively) as ordered by primary key. They only work when a pointer to the destination struct is passed to the methods as argument or when the model is specified using `db.Model()`. Additionally, if no primary key is defined for relevant model, then the model will be ordered by the first field. For example:
+The `First` and `Last` methods will find the first and last record (respectively) as ordered by primary key. They only work when a pointer to the destination struct is passed to the methods as argument or when the model is specified using `db.Model()`. Additionally, if no primary key is defined for the relevant model, then the model will be ordered by the first field. For example:
 
 ```go
 var user User
@@ -79,7 +79,7 @@ db.Find(&users, []int{1,2,3})
 // SELECT * FROM users WHERE id IN (1,2,3);
 ```
 
-If the primary key is a string (for example, like a uuid), the query will be written as follows:
+If the primary key is a string (for example, like an UUID), the query will be written as follows:
 
 ```go
 db.First(&user, "id = ?", "1b74413f-f3b8-409f-ac47-e8c062e3472a")
@@ -179,7 +179,7 @@ db.Where(&User{Name: "jinzhu"}, "Age").Find(&users)
 
 ### <span id="inline_conditions">Inline Condition</span>
 
-Query conditions can be inlined into methods like `First` and `Find` in a similar way to `Where`.
+Query conditions can be inlined into methods like `First` and `Find` similarly to `Where`.
 
 ```go
 // Get by primary key if it were a non-integer type
@@ -238,7 +238,7 @@ db.Where("name = 'jinzhu'").Or(map[string]interface{}{"name": "jinzhu 2", "age":
 // SELECT * FROM users WHERE name = 'jinzhu' OR (name = 'jinzhu 2' AND age = 18);
 ```
 
-For more complicated SQL queries. please also refer to [Group Conditions in Advanced Query](advanced_query.html#group_conditions).
+For more complicated SQL queries. Please also refer to [Group Conditions in Advanced Query](advanced_query.html#group_conditions).
 
 ## Selecting Specific Fields
 

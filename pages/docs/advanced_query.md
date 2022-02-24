@@ -95,7 +95,7 @@ db.Table("(?) as u, (?) as p", subQuery1, subQuery2).Find(&User{})
 
 ## <span id="group_conditions">Group Conditions</span>
 
-Easier to write complicated SQL query with Group Conditions
+Easier to write complicated SQL queries with Group Conditions
 
 ```go
 db.Where(
@@ -240,7 +240,7 @@ db.Where(User{Name: "jinzhu"}).Assign(User{Age: 20}).FirstOrCreate(&user)
 
 ## Optimizer/Index Hints
 
-Optimizer hints allow to control the query optimizer to choose a certain query execution plan, GORM supports it with `gorm.io/hints`, e.g:
+Optimizer hints allow controlling the query optimizer to choose a certain query execution plan, GORM supports it with `gorm.io/hints`, e.g:
 
 ```go
 import "gorm.io/hints"

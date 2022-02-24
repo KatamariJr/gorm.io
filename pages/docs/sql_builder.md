@@ -155,7 +155,7 @@ for rows.Next() {
 
 ## <span id="connection">Connection</span>
 
-Run mutliple SQL in same db tcp connection (not in a transaction)
+Run multiple SQL in same db TCP connection (not in a transaction)
 
 ```go
 db.Connection(func(tx *gorm.DB) error {
@@ -182,7 +182,7 @@ clause.OrderByColumn{
 }
 ```
 
-Then GORM build finally querying SQL in the `Query` callbacks like:
+Then GORM builds finally querying SQL in the `Query` callbacks like:
 
 ```go
 Statement.Build("SELECT", "FROM", "WHERE", "GROUP BY", "ORDER BY", "LIMIT", "FOR")
@@ -194,7 +194,7 @@ Which generate SQL:
 SELECT * FROM `users` ORDER BY `users`.`id` LIMIT 1
 ```
 
-You can define your own `Clause` and use it with GORM, it needs to implements [Interface](https://pkg.go.dev/gorm.io/gorm/clause?tab=doc#Interface)
+You can define your own `Clause` and use it with GORM, it needs to implement [Interface](https://pkg.go.dev/gorm.io/gorm/clause?tab=doc#Interface)
 
 Check out [examples](https://github.com/go-gorm/gorm/tree/master/clause) for reference
 
@@ -216,7 +216,7 @@ Which is supported because GORM allows database driver register Clause Builder t
 
 GORM defined [Many Clauses](https://github.com/go-gorm/gorm/tree/master/clause), and some clauses provide advanced options can be used for your application
 
-Although most of them are rarely used, if you find GORM public API can't match your requirements, may be good to check them out, for example:
+Although most of them are rarely used, if you find GORM public API can't match your requirements, it may be good to check them out, for example:
 
 ```go
 db.Clauses(clause.Insert{Modifier: "IGNORE"}).Create(&user)
@@ -225,7 +225,7 @@ db.Clauses(clause.Insert{Modifier: "IGNORE"}).Create(&user)
 
 ### StatementModifier
 
-GORM provides interface [StatementModifier](https://pkg.go.dev/gorm.io/gorm?tab=doc#StatementModifier) allows you modify statement to match your requirements, take [Hints](hints.html) as example
+GORM provides interface [StatementModifier](https://pkg.go.dev/gorm.io/gorm?tab=doc#StatementModifier) allows you to modify statement to match your requirements, take [Hints](hints.html) as example
 
 ```go
 import "gorm.io/hints"

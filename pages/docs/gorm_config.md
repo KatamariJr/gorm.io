@@ -32,7 +32,7 @@ db, err := gorm.Open(sqlite.Open("gorm.db"), &gorm.Config{
 
 ## <span id="naming_strategy">NamingStrategy</span>
 
-GORM allows users to change the naming conventions by overriding the default `NamingStrategy` which need to implements interface `Namer`
+GORM allows users to change the naming conventions by overriding the default `NamingStrategy` which need to implement the interface `Namer`
 
 ```go
 type Namer interface {

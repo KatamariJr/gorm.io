@@ -112,7 +112,7 @@ db.Create(&Dog{Name: "dog1", Toy: []Toy{{Name: "toy1"}, {Name: "toy2"}}})
 
 ## CRUD with Has Many
 
-Please checkout [Association Mode](associations.html#Association-Mode) for working with has many relations
+Please check out [Association Mode](associations.html#Association-Mode) for working with has many relations
 
 ## Eager Loading
 
@@ -131,7 +131,7 @@ type User struct {
 
 ## FOREIGN KEY Constraints
 
-You can setup `OnUpdate`, `OnDelete` constraints with tag `constraint`, it will be created when migrating with GORM, for example:
+You can set up `OnUpdate`, `OnDelete` constraints with tag `constraint`, it will be created when migrating with GORM, for example:
 
 ```go
 type User struct {

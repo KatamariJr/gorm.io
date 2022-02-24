@@ -34,7 +34,7 @@ db.Use(prometheus.New(prometheus.Config{
 
 ## User-Defined Metrics
 
-You can define your metrics and collect them with GORM Prometheus plugin, which needs to implements `MetricsCollector` interface
+You can define your metrics and collect them with GORM Prometheus plugin, which needs to implement the `MetricsCollector` interface
 
 ```go
 type MetricsCollector interface {

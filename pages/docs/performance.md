@@ -33,7 +33,7 @@ tx.Model(&user).Update("Age", 18)
 ```
 
 {% note warn %}
-**NOTE** Also refer how to enable interpolateparams for MySQL to reduce roundtrip https://github.com/go-sql-driver/mysql#interpolateparams
+**NOTE** Also refer how to enable interpolate parameters for MySQL to reduce roundtrip https://github.com/go-sql-driver/mysql#interpolateparams
 {% endnote %}
 
 ### [SQL Builder with PreparedStmt](sql_builder.html)

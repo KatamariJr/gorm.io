@@ -5,7 +5,7 @@ layout: page
 
 ## Delete a Record
 
-When deleting a record, the deleted value needs to have primary key or it will trigger a [Batch Delete](#batch_delete), for example:
+When deleting a record, the deleted value needs to have a primary key or it will trigger a [Batch Delete](#batch_delete), for example:
 
 ```go
 // Email's ID is `10`
@@ -19,7 +19,7 @@ db.Where("name = ?", "jinzhu").Delete(&email)
 
 ## Delete with primary key
 
-GORM allows to delete objects using primary key(s) with inline condition, it works with numbers, check out [Query Inline Conditions](query.html#inline_conditions) for details
+GORM allows deleting objects using primary key(s) with inline condition, it works with numbers, check out [Query Inline Conditions](query.html#inline_conditions) for details
 
 ```go
 db.Delete(&User{}, 10)
@@ -173,7 +173,7 @@ type User struct {
   DeletedAt soft_delete.DeletedAt `gorm:"uniqueIndex:udx_name"`
 }
 ```
-{% endnote %}
+{% end note %}
 
 Use `1` / `0` as delete flag
 
