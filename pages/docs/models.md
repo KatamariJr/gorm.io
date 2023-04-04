@@ -5,7 +5,7 @@ layout: page
 
 ## Declaring Models
 
-Models are normal structs with basic Go types, pointers/alias of them or custom types implementing [Scanner](https://pkg.go.dev/database/sql/?tab=doc#Scanner) and [Valuer](https://pkg.go.dev/database/sql/driver#Valuer) interfaces
+Models are normal structs with basic Go types, including support for type pointers and aliases. Custom types are supported that implement the [Scanner](https://pkg.go.dev/database/sql/?tab=doc#Scanner) and [Valuer](https://pkg.go.dev/database/sql/driver#Valuer) interfaces.
 
 For Example:
 
@@ -25,13 +25,13 @@ type User struct {
 
 ## Conventions
 
-GORM prefers convetion to configuration, by default, GORM uses `ID` as primary key, pluralize struct name to `snake_cases` as table name, `snake_case` as column name, and uses `CreatedAt`, `UpdatedAt` to track creating/updating time
+GORM prefers convention to configuration. By default, GORM uses a field named `ID` as the primary key, pluralize struct names in `snake_case` as the table name, `snake_case` fields as column names, and uses `CreatedAt` and `UpdatedAt` fields to track creating/updating time.
 
-If you follow the conventions adopted by GORM, you'll need to write very little configuration/code, If convention doesn't match your requirements, [GORM allows you to configure them](conventions.html)
+If you follow the conventions adopted by GORM, you will require very little configuration or additional code. If the conventions don't match your requirements, [GORM allows you to configure them](conventions.html).
 
 ## gorm.Model
 
-GORM defined a `gorm.Model` struct, which includes fields `ID`, `CreatedAt`, `UpdatedAt`, `DeletedAt`
+GORM defines a `gorm.Model` struct, which includes the fields `ID`, `CreatedAt`, `UpdatedAt`, `DeletedAt`.
 
 ```go
 // gorm.Model definition
@@ -43,16 +43,16 @@ type Model struct {
 }
 ```
 
-You can embed it into your struct to include those fields, refer [Embedded Struct](#embedded_struct)
+You can embed the Model into your struct to include those fields. Refer to the [Embedded Struct](#embedded_struct) section for more info.
 
 ## Advanced
 
 ### <span id="field_permission">Field-Level Permission</span>
 
-Exported fields have all permission when doing CRUD with GORM, and GORM allows you to change the field-level permission with tag, so you can make a field to be read-only, write-only, create-only, update-only or ignored
+Exported fields have all permissions when performing CRUD operations with GORM, and GORM allows you to change the field-level permissions with struct tags. You can set a field to be read-only, write-only, create-only, update-only or ignored.
 
 {% note warn %}
-**NOTE** ignored fields won't be created when using GORM Migrator to create table
+**NOTE** Ignored fields won't be created when using GORM Migrator to create a table.
 {% endnote %}
 
 ```go
@@ -69,13 +69,13 @@ type User struct {
 }
 ```
 
-### <name id="time_tracking">Creating/Updating Time/Unix (milli/nano) Seconds Tracking</span>
+### <name id="time_tracking">Creation/Updated Time/Unix (milli/nano) Seconds Tracking</span>
 
-GORM use `CreatedAt`, `UpdatedAt` to track creating/updating time by convention, and GORM will set the  [current time](gorm_config.html#now_func) when creating/updating if the fields are defined
+GORM uses the `CreatedAt` and `UpdatedAt` fields to track creation/updated time. GORM will set the [current time](gorm_config.html#now_func) when creating or updating an object if the fields are defined.
 
-To use fields with a different name, you can configure those fields with tag `autoCreateTime`, `autoUpdateTime`
+To use fields with a different name, you can configure those fields with the tag `autoCreateTime` or `autoUpdateTime` as seen below.
 
-If you prefer to save UNIX (milli/nano) seconds instead of time, you can simply change the field's data type from `time.Time` to `int`
+If you prefer to save UNIX (milli/nano) seconds instead of Go's time.Time struct, you can simply change the field's data type from `time.Time` to `int`.
 
 ```go
 type User struct {
@@ -87,7 +87,7 @@ type User struct {
 }
 ```
 
-### <span id="embedded_struct">Embedded Struct</span>
+### <span id="embedded_struct">Embedded Structs</span>
 
 For anonymous fields, GORM will include its fields into its parent struct, for example:
 
@@ -96,7 +96,7 @@ type User struct {
   gorm.Model
   Name string
 }
-// equals
+// results in...
 type User struct {
   ID        uint           `gorm:"primaryKey"`
   CreatedAt time.Time
@@ -119,7 +119,7 @@ type Blog struct {
   Author  Author `gorm:"embedded"`
   Upvotes int32
 }
-// equals
+// results in...
 type Blog struct {
   ID    int64
 	Name  string
@@ -128,7 +128,7 @@ type Blog struct {
 }
 ```
 
-And you can use tag `embeddedPrefix` to add prefix to embedded fields' db name, for example:
+You can also use the tag `embeddedPrefix` to add a prefix to the embedded fields' db name, for example:
 
 ```go
 type Blog struct {
@@ -136,7 +136,7 @@ type Blog struct {
   Author  Author `gorm:"embedded;embeddedPrefix:author_"`
   Upvotes int32
 }
-// equals
+// results in...
 type Blog struct {
   ID          int64
 	AuthorName  string
@@ -146,10 +146,12 @@ type Blog struct {
 ```
 
 
-### <span id="tags">Fields Tags</span>
+### <span id="tags">Field Tags</span>
 
-Tags are optional to use when declaring models, GORM supports the following tags:
-Tags are case-insensitive, however `camelCase` is preferred.
+Struct tags are optional when declaring models. They allow you to tailor the database model to your liking. Multiple tags can be used on one field. Refer to the Golang spec on [Struct Types](https://go.dev/ref/spec#Struct_types) for more info.
+
+Tags are case-insensitive, however, `camelCase` is preferred.
+GORM supports the following tags:
 
 | Tag Name       | Description                                                            |
 | ---            | ---                                                                    |
@@ -178,4 +180,4 @@ Tags are case-insensitive, however `camelCase` is preferred.
 
 ### Association Tags
 
-GORM allows configuring foreign keys, constraints, many2many table through tags for Associations, check out the [Associations section](associations.html#tags) for details
+GORM allows configuring foreign keys, constraints, and many2many assocaiations through tags. Refer to the [Associations section](associations.html#tags) for details.

@@ -33,7 +33,7 @@ db.Omit("Name", "Age", "CreatedAt").Create(&user)
 
 ## <span id="batch_insert">Batch Insert</span>
 
-To efficiently insert a large number of records, pass a slice to the `Create` method. GORM will generate a single SQL statement to insert all the data and backfill primary key values, hook methods will be invoked too.
+To efficiently insert a large number of records, pass a slice to the `Create` method. GORM will generate a single SQL statement to insert all the data and backfill primary key values. This will still invoke all hook methods.
 
 ```go
 var users = []User{{Name: "jinzhu1"}, {Name: "jinzhu2"}, {Name: "jinzhu3"}}
@@ -44,7 +44,7 @@ for _, user := range users {
 }
 ```
 
-You can specify batch size when creating with `CreateInBatches`, e.g:
+You can specify the batch size when creating with `CreateInBatches`, for example:
 
 ```go
 var users = []User{{Name: "jinzhu_1"}, ...., {Name: "jinzhu_10000"}}

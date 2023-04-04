@@ -3,7 +3,7 @@ title: Connecting to a Database
 layout: page
 ---
 
-GORM officially supports databases MySQL, PostgreSQL, SQLite, SQL Server
+GORM officially supports MySQL, PostgreSQL, SQLite, and SQL Server.
 
 ## MySQL
 
@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-  // refer https://github.com/go-sql-driver/mysql#dsn-data-source-name for details
+  // refer to https://github.com/go-sql-driver/mysql#dsn-data-source-name for details
   dsn := "user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
   db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 }
@@ -22,11 +22,11 @@ func main() {
 
 {% note warn %}
 **NOTE:**
-To handle `time.Time` correctly, you need to include `parseTime` as a parameter. ([more parameters](https://github.com/go-sql-driver/mysql#parameters))
+To handle `time.Time` correctly, you need to include `parseTime` as a parameter in your connection string. ([more parameters](https://github.com/go-sql-driver/mysql#parameters))
 To fully support UTF-8 encoding, you need to change `charset=utf8` to `charset=utf8mb4`. See [this article](https://mathiasbynens.be/notes/mysql-utf8mb4) for a detailed explanation
 {% endnote %}
 
-MySQL Driver provides [few advanced configurations](https://github.com/go-gorm/mysql) can be used during initialization, for example:
+MySQL Driver provides a few [advanced configurations](https://github.com/go-gorm/mysql) that can be used during initialization, for example:
 
 ```go
 db, err := gorm.Open(mysql.New(mysql.Config{
@@ -57,7 +57,7 @@ db, err := gorm.Open(mysql.New(mysql.Config{
 
 ### Existing database connection
 
-GORM allows initializing `*gorm.DB` with an existing database connection
+GORM allows initializing `*gorm.DB` with an existing database connection, for example:
 
 ```go
 import (
@@ -84,7 +84,7 @@ dsn := "host=localhost user=gorm password=gorm dbname=gorm port=9920 sslmode=dis
 db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 ```
 
-We are using [pgx](https://github.com/jackc/pgx) as postgres's database/sql driver, it enables prepared statement cache by default, to disable it:
+Gorm uses [pgx](https://github.com/jackc/pgx) as postgres's database/sql driver. It enables prepared statement cache by default, to disable it:
 
 ```go
 // https://github.com/go-gorm/postgres
@@ -112,7 +112,7 @@ db, err := gorm.Open(postgres.New(postgres.Config{
 
 ### Existing database connection
 
-GORM allows initializing `*gorm.DB` with an existing database connection
+GORM allows initializing `*gorm.DB` with an existing database connection, for example:
 
 ```go
 import (
@@ -132,7 +132,7 @@ gormDB, err := gorm.Open(postgres.New(postgres.Config{
 ```go
 import (
   "gorm.io/driver/sqlite" // Sqlite driver based on GGO
-  // "github.com/glebarez/sqlite" // Pure go SQLite driver, checkout https://github.com/glebarez/sqlite for details
+  // "github.com/glebarez/sqlite" // Pure go SQLite driver, refer to https://github.com/glebarez/sqlite for details
   "gorm.io/gorm"
 )
 
@@ -141,7 +141,7 @@ db, err := gorm.Open(sqlite.Open("gorm.db"), &gorm.Config{})
 ```
 
 {% note warn %}
-**NOTE:** You can also use `file::memory:?cache=shared` instead of a path to a file. This will tell SQLite to use a temporary database in system memory. (See [SQLite docs](https://www.sqlite.org/inmemorydb.html) for this)
+**NOTE:** You can also use `file::memory:?cache=shared` instead of a path to a file. This will tell SQLite to use a temporary database in system memory. (Learn more in the [SQLite docs](https://www.sqlite.org/inmemorydb.html))
 {% endnote %}
 
 ## SQL Server
@@ -191,7 +191,7 @@ func main() {
 
 ## Connection Pool
 
-GORM using [database/sql](https://pkg.go.dev/database/sql) to maintain connection pool
+GORM uses [database/sql](https://pkg.go.dev/database/sql) to maintain the connection pool.
 
 ```go
 sqlDB, err := db.DB()
@@ -206,10 +206,10 @@ sqlDB.SetMaxOpenConns(100)
 sqlDB.SetConnMaxLifetime(time.Hour)
 ```
 
-Refer [Generic Interface](generic_interface.html) for details
+Refer to [Generic Interface](generic_interface.html) for details.
 
 ## Unsupported Databases
 
 Some databases may be compatible with the `mysql` or `postgres` dialect, in which case you could just use the dialect for those databases.
 
-For others, [you are encouraged to make a driver, pull request welcome!](write_driver.html)
+For others, [you are encouraged to make a driver](write_driver.html). Pull requests are welcome!

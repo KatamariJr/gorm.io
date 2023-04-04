@@ -1,13 +1,13 @@
 ---
-title: GORM Guides
+title: Overview
 layout: page
 ---
 
-The fantastic ORM library for Golang aims to be developer friendly.
+GORM (Golang ORM library) aims to be developer friendly!
 
 ## Overview
 
-* Full-Featured ORM
+* Fully-Featured ORM
 * Associations (Has One, Has Many, Belongs To, Many To Many, Polymorphism, Single-table inheritance)
 * Hooks (Before/After Create/Save/Update/Delete/Find)
 * Eager loading with `Preload`, `Joins`
@@ -18,7 +18,7 @@ The fantastic ORM library for Golang aims to be developer friendly.
 * Composite Primary Key, Indexes, Constraints
 * Auto Migrations
 * Logger
-* Extendable, flexible plugin API: Database Resolver (Multiple Databases, Read/Write Splitting) / Prometheus...
+* Extendable, flexible plugin API: Database Resolver (Multiple Databases, Read/Write Splitting), Prometheus
 * Every feature comes with tests
 * Developer Friendly
 

@@ -5,7 +5,7 @@ layout: page
 
 ## <span id="smart_select">Smart Select Fields</span>
 
-GORM allows select specific fields with [`Select`](query.html), if you often use this in your application, maybe you want to define a smaller struct for API usage which can select specific fields automatically, for example:
+GORM allows selecting specific fields with [`Select`](query.html). If you often use these functions in your application, you might want to define a smaller struct for API usage which can select specific fields automatically, for example:
 
 ```go
 type User struct {
@@ -27,7 +27,7 @@ db.Model(&User{}).Limit(10).Find(&APIUser{})
 ```
 
 {% note warn %}
-**NOTE** `QueryFields` mode will select by all fields' name for current model
+**NOTE** `QueryFields` mode will select all field names for the current model.
 {% endnote %}
 
 ```go
@@ -64,11 +64,11 @@ db.Clauses(clause.Locking{
 // SELECT * FROM `users` FOR UPDATE NOWAIT
 ```
 
-Refer [Raw SQL and SQL Builder](sql_builder.html) for more detail
+Refer to [Raw SQL and SQL Builder](sql_builder.html) pages for more details.
 
 ## SubQuery
 
-A subquery can be nested within a query, GORM can generate subquery when using a `*gorm.DB` object as param
+A subquery can be nested within a query. GORM can generate a subquery when using a `*gorm.DB` object as a parameter, for example:
 
 ```go
 db.Where("amount > (?)", db.Table("orders").Select("AVG(amount)")).Find(&orders)
@@ -79,9 +79,9 @@ db.Select("AVG(age) as avgage").Group("name").Having("AVG(age) > (?)", subQuery)
 // SELECT AVG(age) as avgage FROM `users` GROUP BY `name` HAVING AVG(age) > (SELECT AVG(age) FROM `users` WHERE name LIKE "name%")
 ```
 
-### <span id="from_subquery">From SubQuery</span>
+### <span id="from_subquery">SubQuery as FROM</span>
 
-GORM allows you using subquery in FROM clause with method `Table`, for example:
+GORM allows you to use a subquery in the FROM clause by using the `Table` method, for example:
 
 ```go
 db.Table("(?) as u", db.Model(&User{}).Select("name", "age")).Where("age = ?", 18}).Find(&User{})
@@ -95,7 +95,7 @@ db.Table("(?) as u, (?) as p", subQuery1, subQuery2).Find(&User{})
 
 ## <span id="group_conditions">Group Conditions</span>
 
-Easier to write complicated SQL queries with Group Conditions
+Grouping Conditions in a Where clause makes it easier to write complicated SQL queries, for example:
 
 ```go
 db.Where(
@@ -109,14 +109,14 @@ db.Where(
 
 ## IN with multiple columns
 
-Selecting IN with multiple columns
+To utilize a multivalued IN clause, use a two-dimensional slice of interfaces.
 
 ```go
 db.Where("(name, age, role) IN ?", [][]interface{}{{"jinzhu", 18, "admin"}, {"jinzhu2", 19, "user"}}).Find(&users)
 // SELECT * FROM users WHERE (name, age, role) IN (("jinzhu", 18, "admin"), ("jinzhu 2", 19, "user"));
 ```
 
-## Named Argument
+## Named Arguments
 
 GORM supports named arguments with [`sql.NamedArg`](https://tip.golang.org/pkg/database/sql/#NamedArg) or `map[string]interface{}{}`, for example:
 
@@ -128,11 +128,11 @@ db.Where("name1 = @name OR name2 = @name", map[string]interface{}{"name": "jinzh
 // SELECT * FROM `users` WHERE name1 = "jinzhu" OR name2 = "jinzhu" ORDER BY `users`.`id` LIMIT 1
 ```
 
-Check out [Raw SQL and SQL Builder](sql_builder.html#named_argument) for more detail
+Refer to [Raw SQL and SQL Builder](sql_builder.html#named_argument) for more details.
 
-## Find To Map
+## Query into a Map
 
-GORM allows scan result to `map[string]interface{}` or `[]map[string]interface{}`, don't forget to specify `Model` or `Table`, for example:
+GORM allows scanning results to `map[string]interface{}` or `[]map[string]interface{}`, as long as you specify `Model` or `Table`, for example:
 
 ```go
 result := map[string]interface{}{}
@@ -142,9 +142,9 @@ var results []map[string]interface{}
 db.Table("users").Find(&results)
 ```
 
-## FirstOrInit
+## First Or Init
 
-Get first matched record or initialize a new instance with given conditions (only works with struct or map conditions)
+Utilize `FirstOrInit` to get the first matched record or initialize a new instance with the given conditions (only works with struct or map conditions)
 
 ```go
 // User not found, initialize it with give conditions
@@ -160,7 +160,7 @@ db.FirstOrInit(&user, map[string]interface{}{"name": "jinzhu"})
 // user -> User{ID: 111, Name: "Jinzhu", Age: 18}
 ```
 
-initialize struct with more attributes if record not found, those `Attrs` won't be used to build SQL query
+Optionally, initialize the struct with more attributes if the record was not found by using the `Attrs` method. Those `Attrs` won't be used to build the SQL query.
 
 ```go
 // User not found, initialize it with give conditions and Attrs
@@ -179,7 +179,7 @@ db.Where(User{Name: "Jinzhu"}).Attrs(User{Age: 20}).FirstOrInit(&user)
 // user -> User{ID: 111, Name: "Jinzhu", Age: 18}
 ```
 
-`Assign` attributes to struct regardless it is found or not, those attributes won't be used to build SQL query and the final data won't be saved into database
+You can `Assign` attributes to the returned struct regardless of it was found or initialized. Like `Attrs`, these attributes won't be used to build the SQL query and the final data won't be saved into the database.
 
 ```go
 // User not found, initialize it with give conditions and Assign attributes
@@ -192,9 +192,9 @@ db.Where(User{Name: "Jinzhu"}).Assign(User{Age: 20}).FirstOrInit(&user)
 // user -> User{ID: 111, Name: "Jinzhu", Age: 20}
 ```
 
-## FirstOrCreate
+## First Or Create
 
-Get first matched record or create a new one with given conditions (only works with struct, map conditions)
+Utilize `FirstOrCreate` to get the first matched record or create a new one with given conditions (only works with struct or map conditions)
 
 ```go
 // User not found, create a new record with give conditions
@@ -207,7 +207,7 @@ db.Where(User{Name: "jinzhu"}).FirstOrCreate(&user)
 // user -> User{ID: 111, Name: "jinzhu", "Age": 18}
 ```
 
-Create struct with more attributes if record not found, those `Attrs` won't be used to build SQL query
+Optionally, initialize the struct with more attributes if the record was not found by using the `Attrs` method. Those `Attrs` won't be used to build the SQL query.
 
 ```go
 // User not found, create it with give conditions and Attrs
@@ -222,7 +222,7 @@ db.Where(User{Name: "jinzhu"}).Attrs(User{Age: 20}).FirstOrCreate(&user)
 // user -> User{ID: 111, Name: "jinzhu", Age: 18}
 ```
 
-`Assign` attributes to the record regardless it is found or not and save them back to the database.
+You can `Assign` attributes to the returned struct regardless of it was found or created. Like `Attrs`, these attributes won't be used to build the SQL query. However, the final data will be saved into the database.
 
 ```go
 // User not found, initialize it with give conditions and Assign attributes
@@ -240,7 +240,7 @@ db.Where(User{Name: "jinzhu"}).Assign(User{Age: 20}).FirstOrCreate(&user)
 
 ## Optimizer/Index Hints
 
-Optimizer hints allow controlling the query optimizer to choose a certain query execution plan, GORM supports it with `gorm.io/hints`, e.g:
+Optimizer hints allow you to control the query optimizer to choose a certain query execution plan. GORM supports these by importing `gorm.io/hints`, for example:
 
 ```go
 import "gorm.io/hints"
@@ -249,7 +249,7 @@ db.Clauses(hints.New("MAX_EXECUTION_TIME(10000)")).Find(&User{})
 // SELECT * /*+ MAX_EXECUTION_TIME(10000) */ FROM `users`
 ```
 
-Index hints allow passing index hints to the database in case the query planner gets confused.
+`UseIndex` and `ForceIndex` allow passing index hints to the database in case the query planner gets confused.
 
 ```go
 import "gorm.io/hints"
@@ -261,7 +261,7 @@ db.Clauses(hints.ForceIndex("idx_user_name", "idx_user_id").ForJoin()).Find(&Use
 // SELECT * FROM `users` FORCE INDEX FOR JOIN (`idx_user_name`,`idx_user_id`)"
 ```
 
-Refer [Optimizer Hints/Index/Comment](hints.html) for more details
+Refer to [Optimizer Hints/Index/Comment](hints.html) for more details.
 
 ## Iteration
 
@@ -282,7 +282,7 @@ for rows.Next() {
 
 ## FindInBatches
 
-Query and process records in batch
+Query and process records in batch.
 
 ```go
 // batch size 100

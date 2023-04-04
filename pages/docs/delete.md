@@ -173,7 +173,7 @@ type User struct {
   DeletedAt soft_delete.DeletedAt `gorm:"uniqueIndex:udx_name"`
 }
 ```
-{% end note %}
+{% endnote %}
 
 Use `1` / `0` as delete flag
 
